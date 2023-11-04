@@ -1,5 +1,5 @@
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr
 
 class AuthDetails(BaseModel):
-    email: EmailStr = Field(..., description="Email address")
-    password: str = Field(..., description="Password")
+    email: EmailStr
+    password: str
