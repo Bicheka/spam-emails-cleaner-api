@@ -1,6 +1,6 @@
 import uvicorn
 from fastapi import FastAPI, HTTPException
-from model.Auth import AuthDetails
+from auth import AuthDetails
 from email_deletion import delete_spam_emails
 
 from fastapi.middleware.cors import CORSMiddleware

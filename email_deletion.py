@@ -1,6 +1,6 @@
 import imaplib
-from fastapi import HTTPException, status
-from model.Auth import AuthDetails
+from fastapi import HTTPException
+from auth import AuthDetails
 
 async def delete_spam_emails(data: AuthDetails)->{}:
     SPAM_FOLDER = "[Gmail]/Spam"  # The folder where spam emails are moved to by Gmail
