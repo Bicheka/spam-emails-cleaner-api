@@ -2,7 +2,7 @@ import imaplib
 from fastapi import HTTPException, status
 from model.Auth import AuthDetails
 
-async def delete_spam_emails(data: AuthDetails)->str:
+async def delete_spam_emails(data: AuthDetails)->{}:
     SPAM_FOLDER = "[Gmail]/Spam"  # The folder where spam emails are moved to by Gmail
 
     try:
@@ -29,7 +29,11 @@ async def delete_spam_emails(data: AuthDetails)->str:
             # Permanently remove deleted emails (Expunge)
             mail.expunge()
 
-            return "Deleted " + str(len(email_id_list)) + " emails"
+            return {
+                "status": "success",
+                "emails_deleted": len(email_id_list),
+                "message": "Deleted " + str(len(email_id_list)) + " emails from " + data.email
+            }
 
     except imaplib.IMAP4.error as e:
         raise HTTPException(status_code=401, detail="IMAP error: " + str(e))

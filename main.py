@@ -15,9 +15,9 @@ async def clear_spam_emails(data: AuthDetails):
         result = await delete_spam_emails(data)
         return result
     except HTTPException as e:
-        return e
+        raise e
     except Exception as e:
-        return HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
