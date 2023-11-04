@@ -3,7 +3,17 @@ from fastapi import FastAPI, HTTPException
 from model.Auth import AuthDetails
 from email_deletion import delete_spam_emails
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/clear")
 async def clear_spam_emails(data: AuthDetails):
