@@ -15,6 +15,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/test")
+async def root():
+    return {"message": "working ok"}
+
 @app.post("/clear")
 async def clear_spam_emails(data: AuthDetails):
     try:
