@@ -22,10 +22,6 @@ async def root():
 @app.post("/clear")
 async def clear_spam_emails(data: AuthDetails):
     try:
-        email = data.email
-        password = data.password
-        print("Email: " + email)
-        print("Password: " + password)
         result = await delete_spam_emails(data)
         return result
     except HTTPException as e:
