@@ -10,6 +10,9 @@ async def delete_spam_emails(data: AuthDetails)->{}:
         with imaplib.IMAP4_SSL("imap.gmail.com") as mail:
             # Log in to email account
             mail.login(data.email, data.password)
+            
+            #increase the maximum number of messages to be handled
+            mail._MAXLINE = 1000000
 
             # Select the spam folder
             result, _ = mail.select(SPAM_FOLDER)
