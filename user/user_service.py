@@ -1,5 +1,6 @@
 from fastapi import HTTPException, status
 from user.user_model import User, UserResponse
+from email_deletion import delete_spam_emails
 from motor.motor_asyncio import AsyncIOMotorClient
 from encryption import encrypt_password, decrypt_password
 import os
@@ -22,6 +23,8 @@ async def create_user(user: User) -> UserResponse:
     existing_user = await collection.find_one({"email": user.email})
     if existing_user:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="User already registered")
+
+    await delete_spam_emails(user)
 
     # Hash the user's password
     hashed_password = encrypt_password(user.password)
