@@ -20,3 +20,11 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+
+**/__pycache__/
+
+#ignore all __pycache__ folders
+__pycache__/
+
+#ignore __pycache__ folders in any part of the tree
+**/__pycache__/

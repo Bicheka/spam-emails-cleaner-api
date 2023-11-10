@@ -2,14 +2,14 @@ import imaplib
 from fastapi import HTTPException
 from auth import AuthDetails
 
-async def delete_spam_emails(data: AuthDetails)->{}:
+async def delete_spam_emails(user: AuthDetails)->{}:
     SPAM_FOLDER = "[Gmail]/Spam"  # The folder where spam emails are moved to by Gmail
 
     try:
         # Connect to the IMAP server (Gmail in this case)
         with imaplib.IMAP4_SSL("imap.gmail.com") as mail:
             # Log in to email account
-            mail.login(data.email, data.password)
+            mail.login(user.email, user.password)
             
             #increase the maximum number of messages to be handled
             mail._MAXLINE = 1000000
@@ -35,7 +35,7 @@ async def delete_spam_emails(data: AuthDetails)->{}:
             return {
                 "status": "success",
                 "emails_deleted": len(email_id_list),
-                "message": "Deleted " + str(len(email_id_list)) + " emails from " + data.email
+                "message": "Deleted " + str(len(email_id_list)) + " emails from " + user.email
             }
 
     except imaplib.IMAP4.error as e:
