@@ -39,6 +39,6 @@ async def delete_spam_emails(user: AuthDetails)->{}:
             }
 
     except imaplib.IMAP4.error as e:
-        raise HTTPException(status_code=401, detail="IMAP error: " + str(e))
+        raise HTTPException(status_code=401, detail="Error authenticating email or app password might be wrong")
     except Exception as e:
-        raise HTTPException(status_code=500, detail="An error occurred: " + str(e))
+        raise HTTPException(status_code=500, detail="An error occurred")
