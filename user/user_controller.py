@@ -7,7 +7,7 @@ router = APIRouter()
 # Create a new user
 @router.post("/register", response_model=UserResponse)
 async def register_user(user: User):
-    await user_service.register_user(user)
+    await user_service.create_user(user)
     return {
             "status": "success",
             "message": user.email + " registered successfully" + " and spams emails will be deleted every 3 hours"

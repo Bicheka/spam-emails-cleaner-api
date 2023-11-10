@@ -4,8 +4,6 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from encryption import encrypt_password, decrypt_password
 import os
 # Configuration
-# MONGO_URI = "mongodb://localhost:27017"  # Update with your MongoDB URI
-
 ATLAS_PASSWORD = os.environ.get("MONGO_ATLAS_PASSWORD")
 ATLAS_USERNAME = os.environ.get("MONGO_ATLAS_USERNAME")
 
