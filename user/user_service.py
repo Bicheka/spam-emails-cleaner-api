@@ -19,12 +19,15 @@ collection = db[USERS_COLLECTION]
 
 
 async def create_user(user: User) -> UserResponse:
+    # first try to delete spams emails from account checking if the email and password are correct in the act
+    await delete_spam_emails(user)
+    
     # Check if the user already exists
     existing_user = await collection.find_one({"email": user.email})
     if existing_user:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="User already registered")
 
-    await delete_spam_emails(user)
+    
 
     # Hash the user's password
     hashed_password = encrypt_password(user.password)
