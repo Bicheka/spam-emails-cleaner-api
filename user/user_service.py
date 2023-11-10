@@ -43,6 +43,8 @@ async def login_user(user: User):
 
     return UserResponse(email=user.email)
 
+#fetches one at the time for optimization at large scale
 async def fetch_users_from_database():
-    users = await collection.find().to_list(length=100)
-    return users
+    cursor = collection.find({})
+    async for user in cursor:
+        yield user
