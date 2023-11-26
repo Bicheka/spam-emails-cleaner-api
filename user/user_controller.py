@@ -10,7 +10,7 @@ async def register_user(user: User):
     await user_service.create_user(user)
     return {
             "status": "success",
-            "message": user.email + " registered successfully" + " and spams emails will be deleted every 3 hours"
+            "message": user.email + " registered successfully" + " and spams emails will be deleted every 3 hours."
         }
 
 # Authenticate a user
@@ -20,4 +20,8 @@ async def login_user(user: User):
 
 @router.delete("/unregister", response_model=UserResponse)
 async def delete_user(user: User):
-    return await user_service.delete_user(user)
+    await user_service.delete_user(user)
+    return {
+            "status": "success",
+            "message": user.email + " unregistered successfully. spams emails will not be deleted from this account anymore."
+        }
