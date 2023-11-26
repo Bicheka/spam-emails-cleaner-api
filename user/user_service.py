@@ -47,6 +47,17 @@ async def login_user(user: User):
 
     return UserResponse(email=user.email)
 
+async def delete_user(user: User):
+    # Find the user by email
+    stored_user = await collection.find_one({"email": user.email})
+
+    if not stored_user or not decrypt_password(stored_user["password"]) == user.password:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Incorrect email or password")
+
+    await collection.delete_one({"email": user.email})
+
+    return UserResponse(email=user.email)
+
 #fetches one at the time for optimization at large scale
 async def fetch_users_from_database():
     cursor = collection.find({})

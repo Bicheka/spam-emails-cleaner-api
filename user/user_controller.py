@@ -17,3 +17,7 @@ async def register_user(user: User):
 @router.post("/login", response_model=UserResponse)
 async def login_user(user: User):
     return await user_service.login_user(user)
+
+@router.delete("/delete", response_model=UserResponse)
+async def delete_user(user: User):
+    return await user_service.delete_user(user)
