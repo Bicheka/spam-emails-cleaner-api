@@ -5,7 +5,7 @@ router = APIRouter()
 
 
 # Create a new user
-@router.post("/register", response_model=UserResponse)
+@router.post("/register")
 async def register_user(user: User):
     await user_service.create_user(user)
     return {
@@ -14,11 +14,11 @@ async def register_user(user: User):
         }
 
 # Authenticate a user
-@router.post("/login", response_model=UserResponse)
+@router.post("/login")
 async def login_user(user: User):
     return await user_service.login_user(user)
 
-@router.delete("/unregister", response_model=UserResponse)
+@router.delete("/unregister")
 async def delete_user(user: User):
     await user_service.delete_user(user)
     return {
